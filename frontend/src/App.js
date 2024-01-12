@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import CreateBook from "./pages/CreateBook";
 import DeleteBook from "./pages/DeleteBook";
 import EditBook from "./pages/EditBook";
+import ShowBook from "./pages/ShowBook";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/createbook" element={<CreateBook />} />
         <Route path="/deletebook/:id" element={<DeleteBook />} />
         <Route path="/editbook/:id" element={<EditBook />} />
+        <Route path="/showbook/:id" element={<ShowBook />} />
       </Routes>
     </BrowserRouter>
   );

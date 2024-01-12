@@ -26,6 +26,7 @@ function Home() {
           {book.title} by {book.author}
           <Link to={`/deletebook/${book._id}`}>Delete Book</Link>
           <Link to={`/editbook/${book._id}`}>Edit Book</Link>
+          <Link to={`/showbook/${book._id}`}>Show Book</Link>
         </div>
       ))}
       <Link to="/createbook">Create Book</Link>
