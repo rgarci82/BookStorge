@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { BsArrowLeft } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 
 function CreateBook() {
@@ -27,36 +28,51 @@ function CreateBook() {
   }
 
   return (
-    <div>
-      <Link to="/">Home</Link>
-      <div>
-        <label htmlFor="book-title">Book Title</label>
-        <input
-          type="text"
-          id="book-title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
+    <div className="p-4">
+      <div className="flex">
+        <Link
+          className="bg-sky-800 text-white px-4 py-1 rounded-lg w-fit"
+          to={"/"}
+        >
+          <BsArrowLeft className="text-2xl" />
+        </Link>
       </div>
-      <div>
-        <label htmlFor="book-author">Book Author</label>
-        <input
-          type="text"
-          id="book-author"
-          value={author}
-          onChange={(e) => setAuthor(e.target.value)}
-        />
+      <h1 className="text-2xl my-4">Edit Book</h1>
+      <div className="flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto">
+        <div className="my-4">
+          <label className="text-xl mr-4 text-gray-500">Title</label>
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            className="border-2 border-gray-500 px-4 py-2 w-full rounded-md"
+          />
+        </div>
+        <div className="my-4">
+          <label className="text-xl mr-4 text-gray-500">Author</label>
+          <input
+            type="text"
+            value={author}
+            onChange={(e) => setAuthor(e.target.value)}
+            className="border-2 border-gray-500 px-4 py-2 w-full rounded-md"
+          />
+        </div>
+        <div className="my-4">
+          <label className="text-xl mr-4 text-gray-500">Title</label>
+          <input
+            type="number"
+            value={publishedYear}
+            onChange={(e) => setPublishedYear(e.target.value)}
+            className="border-2 border-gray-500 px-4 py-2 w-full rounded-md"
+          />
+        </div>
+        <button
+          className="p-2 bg-sky-300 m-8 rounded-md"
+          onClick={handleCreateBook}
+        >
+          Save
+        </button>
       </div>
-      <div>
-        <label htmlFor="book-publishedYear"> Book Published Year</label>
-        <input
-          type="number"
-          id="book-publishedYear"
-          value={publishedYear}
-          onChange={(e) => setPublishedYear(e.target.value)}
-        />
-      </div>
-      <button onClick={handleCreateBook}>Create Book</button>
     </div>
   );
 }
