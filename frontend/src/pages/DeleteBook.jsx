@@ -9,7 +9,7 @@ function DeleteBook() {
 
   function handleDeleteBook() {
     axios
-      .delete(`http://localhost:5555/books/${id}`)
+      .delete(`https://book-storge.vercel.app/books/${id}`)
       .then(() => {
         navigate("/");
       })

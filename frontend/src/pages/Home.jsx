@@ -12,7 +12,7 @@ function Home() {
   useEffect(() => {
     function getBooks() {
       axios
-        .get("http://localhost:5555/books")
+        .get("https://book-storge.vercel.app/books")
         .then((res) => {
           setBooks(res.data.data);
         })

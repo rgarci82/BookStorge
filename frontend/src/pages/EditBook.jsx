@@ -12,7 +12,7 @@ function EditBook() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5555/books/${id}`)
+      .get(`https://book-storge.vercel.app/books/${id}`)
       .then((res) => {
         setTitle(res.data.title);
         setAuthor(res.data.author);

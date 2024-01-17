@@ -28,7 +28,7 @@ function ShowBook() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5555/books/${id}`)
+      .get(`https://book-storge.vercel.app/books/${id}`)
       .then((res) => {
         setBook(res.data);
       })

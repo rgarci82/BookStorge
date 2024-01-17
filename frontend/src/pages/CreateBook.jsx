@@ -18,7 +18,7 @@ function CreateBook() {
     };
 
     axios
-      .post("http://localhost:5555/books", newBook)
+      .post("https://book-storge.vercel.app/books", newBook)
       .then(() => {
         navigate("/");
       })
