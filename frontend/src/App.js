@@ -1,5 +1,4 @@
 import Home from "./pages/Home";
-import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import CreateBook from "./pages/CreateBook";
 import DeleteBook from "./pages/DeleteBook";

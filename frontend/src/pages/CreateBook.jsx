@@ -10,7 +10,7 @@ function CreateBook() {
 
   const navigate = useNavigate();
 
-  function handleCreateBook(e) {
+  function handleCreateBook() {
     const newBook = {
       title,
       author,
