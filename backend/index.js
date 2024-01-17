@@ -38,6 +38,6 @@ function connect() {
     });
 }
 
-connect;
+connect();
 
 export default app;
