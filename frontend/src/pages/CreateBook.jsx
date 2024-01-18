@@ -2,15 +2,18 @@ import axios from "axios";
 import React, { useState } from "react";
 import { BsArrowLeft } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
+import Spinner from "../components/Spinner";
 
 function CreateBook() {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [publishedYear, setPublishedYear] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
   function handleCreateBook() {
+    setLoading(true);
     const newBook = {
       title,
       author,
@@ -18,8 +21,9 @@ function CreateBook() {
     };
 
     axios
-      .post("https://book-storge.vercel.app/books", newBook)
+      .post("http://localhost:5555/books", newBook)
       .then(() => {
+        setLoading(false);
         navigate("/");
       })
       .catch((error) => {
@@ -38,6 +42,7 @@ function CreateBook() {
         </Link>
       </div>
       <h1 className="text-2xl my-4 text-center">Create Book</h1>
+      {loading ? <Spinner /> : ""}
       <div className="flex flex-col border-2 border-sky-400 rounded-xl p-4 mx-auto md:w-[600px]">
         <div className="my-4">
           <label className="text-xl mr-4 text-gray-500">Title</label>

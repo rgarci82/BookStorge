@@ -2,10 +2,12 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { BsArrowLeft } from "react-icons/bs";
 import { Link, useParams } from "react-router-dom";
+import Spinner from "../components/Spinner";
 
 function ShowBook() {
   const [book, setBook] = useState({});
   const { id } = useParams();
+  const [loading, setLoading] = useState(false);
 
   const formatOptions = {
     year: "numeric",
@@ -27,9 +29,11 @@ function ShowBook() {
   );
 
   useEffect(() => {
+    setLoading(true);
     axios
       .get(`https://book-storge.vercel.app/books/${id}`)
       .then((res) => {
+        setLoading(false);
         setBook(res.data);
       })
       .catch((error) => {
@@ -48,32 +52,36 @@ function ShowBook() {
         </Link>
       </div>
       <h1 className="text-3xl my-4 text-center">Show Book</h1>
-      <div className="flex flex-col border-2 border-sky-400 rounded-xl w-fit p-4 m-auto">
-        <div className="my-4">
-          <span className="text-xl mr-4 text-gray-500">Id</span>
-          <span>{book._id}</span>
+      {loading ? (
+        <Spinner />
+      ) : (
+        <div className="flex flex-col border-2 border-sky-400 rounded-xl w-fit p-4 m-auto">
+          <div className="my-4">
+            <span className="text-xl mr-4 text-gray-500">Id</span>
+            <span>{book._id}</span>
+          </div>
+          <div className="my-4">
+            <span className="text-xl mr-4 text-gray-500">Title</span>
+            <span>{book.title}</span>
+          </div>
+          <div className="my-4">
+            <span className="text-xl mr-4 text-gray-500">Author</span>
+            <span>{book.author}</span>
+          </div>
+          <div className="my-4">
+            <span className="text-xl mr-4 text-gray-500">Publish Year</span>
+            <span>{book.publishedYear}</span>
+          </div>
+          <div className="my-4">
+            <span className="text-xl mr-4 text-gray-500">Create Time</span>
+            <span>{createdAtFormatted}</span>
+          </div>
+          <div className="my-4">
+            <span className="text-xl mr-4 text-gray-500">Last Update Time</span>
+            <span>{updatedAtFormatted}</span>
+          </div>
         </div>
-        <div className="my-4">
-          <span className="text-xl mr-4 text-gray-500">Title</span>
-          <span>{book.title}</span>
-        </div>
-        <div className="my-4">
-          <span className="text-xl mr-4 text-gray-500">Author</span>
-          <span>{book.author}</span>
-        </div>
-        <div className="my-4">
-          <span className="text-xl mr-4 text-gray-500">Publish Year</span>
-          <span>{book.publishedYear}</span>
-        </div>
-        <div className="my-4">
-          <span className="text-xl mr-4 text-gray-500">Create Time</span>
-          <span>{createdAtFormatted}</span>
-        </div>
-        <div className="my-4">
-          <span className="text-xl mr-4 text-gray-500">Last Update Time</span>
-          <span>{updatedAtFormatted}</span>
-        </div>
-      </div>
+      )}
     </div>
   );
 }

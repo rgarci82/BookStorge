@@ -4,16 +4,20 @@ import { Link } from "react-router-dom";
 import { MdOutlineAddBox } from "react-icons/md";
 import BooksTable from "../components/BooksTable";
 import BooksCard from "../components/BooksCard";
+import Spinner from "../components/Spinner";
 
 function Home() {
   const [books, setBooks] = useState([]);
   const [showType, setShowType] = useState("card");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     function getBooks() {
       axios
         .get("https://book-storge.vercel.app/books")
         .then((res) => {
+          setLoading(false);
           setBooks(res.data.data);
         })
         .catch((err) => {
@@ -45,7 +49,9 @@ function Home() {
           <MdOutlineAddBox className="text-sky-800 text-4xl" />
         </Link>
       </div>
-      {showType === "card" ? (
+      {loading ? (
+        <Spinner />
+      ) : showType === "card" ? (
         <BooksCard books={books} />
       ) : (
         <BooksTable books={books} />

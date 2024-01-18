@@ -2,18 +2,22 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { BsArrowLeft } from "react-icons/bs";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import Spinner from "../components/Spinner";
 
 function EditBook() {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [publishedYear, setPublishedYear] = useState("");
+  const [loading, setLoading] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
+    setLoading(true);
     axios
       .get(`https://book-storge.vercel.app/books/${id}`)
       .then((res) => {
+        setLoading(false);
         setTitle(res.data.title);
         setAuthor(res.data.author);
         setPublishedYear(res.data.publishedYear);
@@ -29,9 +33,11 @@ function EditBook() {
       author,
       publishedYear,
     };
-    axios.put(`http://localhost:5555/books/${id}`, updatedBook).then(() => {
-      navigate("/");
-    });
+    axios
+      .put(`https://book-storge.vercel.app/books/${id}`, updatedBook)
+      .then(() => {
+        navigate("/");
+      });
   }
 
   return (
@@ -45,6 +51,7 @@ function EditBook() {
         </Link>
       </div>
       <h1 className="text-2xl my-4 text-center">Edit Book</h1>
+      {loading ? <Spinner /> : ""}
       <div className="flex flex-col border-2 border-sky-400 rounded-xl p-4 mx-auto md:w-[600px]">
         <div className="my-4">
           <label className="text-xl mr-4 text-gray-500">Title</label>
